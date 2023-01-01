@@ -49,4 +49,12 @@ class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
     }
+
+
+    protected function _render(string $view, array $data = [])
+    {
+        return view($view, array_merge($data,$this->config ? ['config'=>$this->config] : []));
+    }
+
+
 }

@@ -167,4 +167,16 @@ class Email extends BaseConfig
      * @var bool
      */
     public $DSN = false;
+
+
+    public function __construct()
+    {
+        $this->protocol = env('protocol',$this->protocol );
+        $this->SMTPHost = env('smtp_host',$this->SMTPHost );
+        $this->SMTPPort = (int) env('smtp_port',$this->SMTPPort );
+        $this->SMTPPass = env('smtp_pass',$this->SMTPPass );
+        $this->CRLF = env('crlf',$this->CRLF );
+        $this->newline = env('newline',$this->newline );
+    }
+
 }

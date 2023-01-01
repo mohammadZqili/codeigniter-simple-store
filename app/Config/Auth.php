@@ -185,7 +185,7 @@ class Auth extends \Myth\Auth\Config\Auth
      *
      * @var string|null Name of the ActivatorInterface class
      */
-    public $requireActivation = 'Myth\Auth\Authentication\Activators\EmailActivator';
+    public $requireActivation = null;#'Myth\Auth\Authentication\Activators\EmailActivator';
 
     /**
      * --------------------------------------------------------------------
@@ -346,8 +346,8 @@ class Auth extends \Myth\Auth\Config\Auth
      */
     public $userActivators = [
         'Myth\Auth\Authentication\Activators\EmailActivator' => [
-            'fromEmail' => null,
-            'fromName'  => null,
+            'fromEmail' => "superadmin@gmail.com",
+            'fromName'  => "superadmin",
         ],
     ];
 
@@ -362,8 +362,8 @@ class Auth extends \Myth\Auth\Config\Auth
      */
     public $userResetters = [
         'Myth\Auth\Authentication\Resetters\EmailResetter' => [
-            'fromEmail' => null,
-            'fromName'  => null,
+            'fromEmail' => "superadmin@gmail.com",
+            'fromName'  => "superadmin",
         ],
     ];
 
