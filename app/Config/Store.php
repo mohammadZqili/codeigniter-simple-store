@@ -27,7 +27,7 @@ abstract class Store
         if (logged_in()) {
             if (in_groups('customer')) {
                 $this->setViews('customer');
-            }else{
+            } else {
                 $this->setViews('admin');
             }
         }
@@ -37,6 +37,7 @@ abstract class Store
         'list' => 'index',
         'create' => 'add',
         'edit' => 'edit',
+        'show' => 'show'
     ];
 
     private function setViews($folderPartName)

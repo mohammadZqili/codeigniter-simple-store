@@ -74,7 +74,16 @@ class ProductController extends BaseController
     }
 
 
-    public function single($id = null)
+    public function show($id = null)
+    {
+        $data['brands'] = (new BrandService)->getAll();
+        $data['categories'] = (new CategoryService)->getAll();
+        $data['product'] = $this->service->find($id);
+
+        return $this->_render($this->config->views['show'], $data);
+    }
+
+    public function edit($id = null)
     {
         $data['brands'] = (new BrandService)->getAll();
         $data['categories'] = (new CategoryService)->getAll();

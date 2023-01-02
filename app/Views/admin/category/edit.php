@@ -20,27 +20,27 @@
 <div class="container mt-5">
     <form method="post" id="update_category" name="update_category" enctype="multipart/form-data"
           action="<?= site_url('categories/update') ?>">
-        <input type="hidden" name="id" id="id" value="<?php echo $category['id']; ?>">
+        <input type="hidden" name="id" id="id" value="<?php echo $product['id']; ?>">
         <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" class="form-control" value="<?php echo $category['name']; ?>">
+            <input type="text" name="name" class="form-control" value="<?php echo $product['name']; ?>">
         </div>
         <div class="form-group">
                 <label>Show room</label>
 
-            <input type="text" name="show_room" class="form-control" value="<?php echo $category['show_room']; ?>">
+            <input type="text" name="show_room" class="form-control" value="<?php echo $product['show_room']; ?>">
         </div>
 
         <div>
             <label>Description</label>
             <textarea name="description" id="editor1" rows="10" cols="80">
-                    <?php echo $category['description']; ?>
+                    <?php echo $product['description']; ?>
             </textarea>
         </div>
         <div class="form-group">
             <label>image</label>
             <input type="file" name="image" class="form-control"/>
-            <image src="<?php echo base_url("uploads/".$category['image']); ?>" style="height: 100px;width: 100px" />
+            <image src="<?php echo base_url("uploads/".$product['image']); ?>" style="height: 100px;width: 100px" />
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-danger btn-block">Save Data</button>

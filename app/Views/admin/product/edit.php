@@ -42,7 +42,7 @@
                 <option value="" selected disabled hidden>Choose here</option>
 
                 <?php foreach ($categories as $category) { ?>
-                    <option <?php echo $product['category_id']==$category['id'] ? "selected" : ""  ?>
+                    <option <?php echo $category['category_id']==$category['id'] ? "selected" : ""  ?>
                             value="<?php echo $category['id'] ?>"> <?php echo $category['name'] ?></option>
                 <?php } ?>
             </select>
@@ -62,13 +62,13 @@
         <div class="form-group">
             <label>specifications</label>
             <textarea name="specifications" id="editor1" rows="10" cols="80">
-                    <?php echo $product['specifications']; ?>
+                    <?php echo $category['specifications']; ?>
             </textarea>
         </div>
         <div class="form-group">
             <label>image</label>
             <input type="file" name="image" class="form-control"/>
-            <image src="<?php echo base_url("uploads/" . $product['image']); ?>" style="height: 100px;width: 100px"/>
+            <image src="<?php echo base_url("uploads/" . $category['image']); ?>" style="height: 100px;width: 100px"/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-danger btn-block">Save Data</button>

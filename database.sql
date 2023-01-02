@@ -49,7 +49,7 @@ CREATE TABLE `categories` (
 CREATE TABLE `wish_lists` (
                               `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                               `user_id` varchar(100) NOT NULL,
-                              `product_id` text  NULL,
+                              `product_id` int  NULL,
                               `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                               `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP,
                               `deleted_at` timestamp DEFAULT NULL,

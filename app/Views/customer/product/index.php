@@ -2,70 +2,76 @@
 
 
 <?= $this->section('styles') ?>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<title>Shop Homepage - Start Bootstrap Template</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+<!-- Bootstrap icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="css/styles.css" rel="stylesheet"/>
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
-<div class="container mt-4">
-
-    <div class="mt-3">
-        <table class="table table-bordered" id="products-list">
-            <thead>
-            <tr>
-                <th>Product Id</th>
-                <th>Name</th>
-                <th>model</th>
-                <th>color</th>
-                <th>specifications</th>
-                <th>price</th>
-                <th>count</th>
-                <th>brand name</th>
-                <th>category name</th>
-                <th>image</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php if ($products): ?>
-                <?php foreach ($products as $product): ?>
-                    <tr>
-                        <td><?php echo $product['id']; ?></td>
-                        <td><?php echo $product['name']; ?></td>
-                        <td><?php echo $product['model']; ?></td>
-                        <td><?php echo $product['color']; ?></td>
-                        <td><?php echo $product['specifications']; ?></td>
-                        <td><?php echo $product['price']; ?></td>
-                        <td><?php echo $product['count']; ?></td>
-                        <td><?php echo !empty($product['brand']) ? $product['brand']['name'] : ""; ?></td>
-                        <td><?php echo !empty( $product['category']) ? $product['category']['name'] : ""; ?></td>
-                        <td>
-                            <image src="<?php echo base_url("uploads/" . $product['image']); ?>"
-                                   style="height: 100px;width: 100px"/>
-                        </td>
-                        <td>
+            <?php foreach ($products as $product): ?>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                            </div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="<?php echo base_url("uploads/" . $product['image']); ?>" alt="..."/>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder"><a href="/products/<?php echo  $product['id'];?>" /><?php echo $product['name']; ?></h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through"></span>
+                                    $<?php echo $product['price']; ?>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <form action="/wish" method="POST">
+                                        <input type="hidden" name="product_id" value="<?php echo $product['id'] ?>">
+                                        <input class="btn btn-outline-dark mt-auto" type="submit" value="add to Wish list">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                            <form action="/wish" method="POST">
-                                <input type="hidden" name="product_id" value="<?php echo $product['id']?>" >
-                                <input class="btn btn-primary btn-sm" type="submit" value="add to Wish list" >
-                            </form>
-                        </td>
-
-                    </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
-            </tbody>
-        </table>
+
+        </div>
     </div>
-</div>
+</section>
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#products-list').DataTable();
-    });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
 <?= $this->endSection() ?>
+
+
+
+

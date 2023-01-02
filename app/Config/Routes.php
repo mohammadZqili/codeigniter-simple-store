@@ -33,7 +33,10 @@ helper('auth');
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+if(logged_in())
+    $routes->get('/', 'ProductController::index');
+else
+    $routes->get('/', 'Home::index');
 
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static function ($routes) {
     $adminReservedRoutes = config(AdminAuth::class)->reservedRoutes;
@@ -114,11 +117,14 @@ if (logged_in()) {
 
     $routes->group('products', static function ($routes) {
         $routes->get('/', 'ProductController::index');
+        $routes->get('(:num)', 'ProductController::show/$1');
+
         if (in_groups(["admin", "super-admin"])) {
             $routes->get('create', 'ProductController::create');
             $routes->post('/', 'ProductController::store');
 
-            $routes->get('edit/(:num)', 'ProductController::single/$1');
+
+            $routes->get('edit/(:num)', 'ProductController::edit/$1');
             $routes->post('update', 'ProductController::update');
 
             $routes->get('delete/(:num)', 'ProductController::delete/$1');
