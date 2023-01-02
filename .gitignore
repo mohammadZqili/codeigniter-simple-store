@@ -1,7 +1,11 @@
 .env
 composer.lock
 package-lock.json
+
 /vendor/*
+
 /writable/session/*
+
 /writable/logs/*
+
 /writable/uploads/*
