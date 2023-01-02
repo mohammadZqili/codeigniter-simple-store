@@ -1,4 +1,16 @@
 <?= $this->extend($config->viewLayout) ?>
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<style>
+
+    .error {
+        display: block;
+        padding-top: 5px;
+        font-size: 14px;
+        color: red;
+    }
+</style>
+<?= $this->endSection() ?>
 <?= $this->section('main') ?>
 <div class="container mt-5">
     <form method="post" id="update_product" name="update_product" enctype="multipart/form-data"
@@ -42,33 +54,22 @@
                 <option value="" selected disabled hidden>Choose here</option>
 
                 <?php foreach ($categories as $category) { ?>
-                    <option <?php echo $category['category_id']==$category['id'] ? "selected" : ""  ?>
+                    <option <?php echo $product['category_id']==$category['id'] ? "selected" : ""  ?>
                             value="<?php echo $category['id'] ?>"> <?php echo $category['name'] ?></option>
                 <?php } ?>
             </select>
         </div>
 
-        <!--        <div class="form-group">-->
-        <!--            <label>brand name</label>-->
-        <!--            <input type="text" name="brand_id" class="form-control" value="-->
-        <?php //echo $product['brand']['name']; ?><!--">-->
-        <!--        </div>-->
-        <!--        <div class="form-group">-->
-        <!--            <label>category name</label>-->
-        <!--            <input type="text" name="category_id" class="form-control"-->
-        <!--                   value="--><?php //echo $product['category']['name']; ?><!--">-->
-        <!--        </div>-->
-
         <div class="form-group">
             <label>specifications</label>
             <textarea name="specifications" id="editor1" rows="10" cols="80">
-                    <?php echo $category['specifications']; ?>
+                    <?php echo $product['specifications']; ?>
             </textarea>
         </div>
         <div class="form-group">
             <label>image</label>
             <input type="file" name="image" class="form-control"/>
-            <image src="<?php echo base_url("uploads/" . $category['image']); ?>" style="height: 100px;width: 100px"/>
+            <image src="<?php echo base_url("uploads/" . $product['image']); ?>" style="height: 100px;width: 100px"/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-danger btn-block">Save Data</button>

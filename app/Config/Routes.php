@@ -33,7 +33,7 @@ helper('auth');
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-if(logged_in())
+if (logged_in())
     $routes->get('/', 'ProductController::index');
 else
     $routes->get('/', 'Home::index');
@@ -88,15 +88,16 @@ $routes->group('', ['namespace' => 'App\Controllers\Customer'], static function 
 
 if (logged_in()) {
 
-    $routes->group('brands', static function ($routes) {
+    $routes->group('brands', ['filter' => 'role:admin,super-admin,customer'], static function ($routes) {
         $routes->get('/', 'BrandController::index');
-        if (in_groups(["admin", "super-admin"])) {
+
+        $routes->group('', ['filter' => 'role:admin,super-admin'], static function ($routes) {
             $routes->get('create', 'BrandController::create');
             $routes->post('/', 'BrandController::store');
             $routes->get('edit/(:num)', 'BrandController::single/$1');
             $routes->post('update', 'BrandController::update');
             $routes->get('delete/(:num)', 'BrandController::delete/$1');
-        }
+        });
 
 
     });
@@ -104,7 +105,7 @@ if (logged_in()) {
 
     $routes->group('categories', static function ($routes) {
         $routes->get('/', 'CategoryController::index');
-        if (in_groups(["admin", "super-admin"])) {
+        $routes->group('', ['filter' => 'role:admin,super-admin'], static function ($routes) {
             $routes->get('create', 'CategoryController::create');
             $routes->post('/', 'CategoryController::store');
 
@@ -112,14 +113,14 @@ if (logged_in()) {
             $routes->post('update', 'CategoryController::update');
 
             $routes->get('delete/(:num)', 'CategoryController::delete/$1');
-        }
+        });
     });
 
     $routes->group('products', static function ($routes) {
         $routes->get('/', 'ProductController::index');
         $routes->get('(:num)', 'ProductController::show/$1');
 
-        if (in_groups(["admin", "super-admin"])) {
+        $routes->group('', ['filter' => 'role:admin,super-admin'], static function ($routes) {
             $routes->get('create', 'ProductController::create');
             $routes->post('/', 'ProductController::store');
 
@@ -128,20 +129,19 @@ if (logged_in()) {
             $routes->post('update', 'ProductController::update');
 
             $routes->get('delete/(:num)', 'ProductController::delete/$1');
-        }
+        });
     });
 
 
-    $routes->group('wish', static function ($routes) {
-        if (in_groups(["customer"])) {
-            $routes->get('/', 'WishListController::index');
-            $routes->post('/', 'WishListController::store');
+    $routes->group('wish', ['filter' => 'role:customer'], static function ($routes) {
+        $routes->get('/', 'WishListController::index');
+        $routes->post('/', 'WishListController::store');
 
-            $routes->post('update', 'WishListController::update');
+        $routes->post('update', 'WishListController::update');
 
-            $routes->get('delete/(:num)', 'WishListController::delete/$1');
-            $routes->get('empty', 'WishListController::empty');
-        }
+        $routes->get('delete/(:num)', 'WishListController::delete/$1');
+        $routes->get('empty', 'WishListController::empty');
+
     });
 
 }
